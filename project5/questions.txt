@@ -1,0 +1,87 @@
+0.  How many different colors does each format support? (BMP, GIF, JPEG, PNG)
+    BMP - depends, but up to 32 bit color, or over 240 trillion.
+    GIF - up to 8-bit color, or 256 colors.
+    JPEG - up to 24 bit, or 16.8 million colors.
+    PNG - 24 bit RGB or 32 bit with RGBA
+    
+1.  Which of these formats supports animation?
+    Only GIF supports animation.
+
+2.  s the difference between lossy and lossless compression?
+    Lossless compression makes image smaller, but with no negative effect to quality and can be reversed.
+    Lossy means image is smaller, usually more than lossless compression, but with cost to the quality.
+    Saving in lossy format will make image progressively worse and worse.
+
+3.  Which of these formats is lossy-compressed?
+    JPEG is lossy as it was designed to make images as small as possible in the way humans wont notice.
+
+4.  What happens, technically speaking, when a file is deleted on a FAT file system?
+    FAT, or File Allocation Table store linked list of disk clusters that DOS uses to mange space on RAM.
+    16/32 refers to the sector number's bi length. Hard dries are addressed in 512byte sectors.
+    FAT system groups these into clusters. 
+    When FAT file is deleted, 1. filename is modified to signal file has been deleted.
+    2. Occupied FAT cluster are listed as free clusters
+    However, the actual file data is not touched and could still be recovered.
+
+5.  What can someone like you do to ensure (with high probability) that files you delete cannot be recovered?
+    1. Physically destroy the drive.
+    2. Degauss the drive's magnetic components
+    3. Overwite drive's data which destorys original data.
+    
+6.  s stdint.h?
+    A header file that declare sets of integer types with specified widths(# of bits used to store its value in binary)
+    
+7.  s the point of using uint8_t, uint32_t, int32_t, and uint16_t in a program?
+    These are exact-width integer types. 
+    Using these makes it clear to the program that you intend to use the data in a specific way.
+    uint8_t: typedef unsigned char
+    uint32_t: typedef unsigned long int
+    int32_t: typedef signed long int
+    uint16_t: typedef unsigned int
+
+8.  How many bytes is a BYTE, a DWORD, a LONG, and a WORD, respectively? (Assume a 32-bit architecture like the CS50 Appliance.)
+    BYTE is 1 byte or 8 bit
+    DWORD is 4 bytes or 32 bit
+    LONG is 4 bytes or 32 bit
+    WORD is 2 bytes or 16 bit
+
+9.  What (in ASCII, decimal, or hexadecimal) must the first two bytes of any BMP file be? 
+    (Leading bytes used to identify file formats (with high probability) are generally called "magic numbers.)"
+    First 2 bytes of any BMP should be a WORD of bfType and set to BM 0x4D42.
+
+
+10. s the difference between bfSize and biSize?
+    bfSize is the size, in bytes, of the BMP file
+    biSize is size of the BITMAPINFOHEADER structure in bytes.
+    bonus:
+    biSizeImage - total size of img in bytes - inlcude pixels and padding
+    biWidth - width of img in pixels, not include padding
+    biHeight - height of img in pixel
+
+11. What does it mean if biHeight is negative?
+    Positive biHeight means bitmap is bottom-up Device Independent Bitmap, and origin is lower-left corner.
+    If negative, bitmap is top-down DIB and origin is upper-left corner.
+
+12. What field in BITMAPINFOHEADER specifies the s color depth (i.e., bits per pixel)?
+    The biBitCount of BITMAPINFOHEADER determines the number of bits that define each pixel and thus max # of colors in BMP.
+
+13. Why might fopen return NULL in copy.c:37?
+    NULL will be returned if file is not accessible. No authority, not readable, or no space to read-to.
+
+14. Why is the third argument to fread always 1 in our code?
+    fread( void *buffer, size_t size, size_t num, FILE *stream ), reads # of objects(size in bytes) and place them into the array pointed to by buffer.
+    The third argument, size_t num is 1 because we're reading 1 RGB triple at a time.
+
+15. What value does copy.c:70 assign padding if bi.biWidth is 3?
+    1
+
+16. What does fseek do?
+    Move to specific location of a file. 
+    fseek(FILE *stream, long offset, int origin) sets the file position data for the given stream. Return 0 on success, non-zero on faile.
+
+17. What is SEEK_CUR?
+    Argument, one of 3 origin values, that tells seek() to seek from the current location.
+
+18. Whodunit?
+    Milo Banana dun it.
+BMPWhatWhatWhatWhat
