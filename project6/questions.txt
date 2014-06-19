@@ -1,0 +1,62 @@
+0.  What is pneumonoultramicroscopicsilicovolcanoconiosis?
+    It is a lung disease caused by inhaling fine ash and sand dust. Also the longest word in the English language.
+
+1.  According to its man page, what does getrusage do?
+    getrusage(int who, struct rusage *usage) returns resource measures for who, which can be RUSAGE_SELF, RUSAGE_CHILDREN, and RUSAGE_THREAD.
+    Resource usage is returned in rusage data type which include various values such as CPU time, blocks of operation, etc.
+    
+    
+
+
+2.  Per that same man page, how many members are in a variable of type struct rusage?
+    Rusage stores 16 sets of data.
+    
+3.  Why do you think we pass before and after by reference (instead of by value) to calculate, even though re not changing their contents?
+    By passing the reference or the address itself, the computer doesn't have to malloc and copy all the data sets from rusage struct.
+    
+
+4.  Explain as precisely as possible, in a paragraph or more, how main goes about reading words from a file. 
+    In other words, convince us that you indeed understand how that s for loop works.
+    The speller program checks spelling of the words provided in the 'text'. 
+    If 3 arguments are provided, program assumes 1st argument is the dictionary provided and that 2nd is the text file.
+    If only 2 provided, it assumes 1st is the text file.
+    Program saves file as 'fp' with fopen(text, 'r')
+    Now, after the file is successfully opened, program goes through each character in the file and runs a spell check.
+    It uses a for loop to go through all the characters.
+    Normally, for loop strucuture is for(var i = 0; i < end; i++).
+    Here, the program uses fgetc() to iterate through the text. fgetc() returns a char pointed next from the stream.
+    for (int c = fgetc(fp); c != EOF; c = fgetc(fp)) <-here, c is declared as the first char of 'fp' and loop continues until EOF. It then set c as the next char.
+    
+    If c is an alphabet OR is a slash /, apostrophe ', AND index > 0, add this character to 'word' array and increment index by 1.
+    Also, if here, index is > LENGTH, just go through the rest of the char and set index = 0 at the end to start a new word.
+    
+    If c is a digit, like when index > LENGTH, go through the rest of it, and reset index to 0
+    
+    If c is NOT an alphabet, nor a digit, when index > 0 it's considered a start of a new word (probably a space).
+    Here we would add '/0' to finish off the previous word, update word counter, and run the spell check on the word.
+    We get rusage before and after calling the check() function and calculate the time it takes, print if misspelt is true and set index to 0 to start the next word.
+    
+
+5.  Why do you think we used fgetc to read each s characters one at a time rather than use fscanf with a format string like "%s" to read whole words at a time? 
+    Put another way, what problems might arise by relying on fscanf alone?
+    fscanf() will not be as accurate as fgetc(). 
+    fscanf() reads data from stream and store them according to the format in the locations pointed.
+    fscanf will ignore any whitespace characters and some characters will be skipped over.
+
+6.  Why do you think we declared the parameters for check and load as constant?
+    We keep word for check and dictionary for load as constant because having them mutable would cause problems.
+    Since check and load takes in a pointer as an argument, this pointer becomes immutable. 
+    Content AT the pointer can change, but not the specific address that this pointer points at.
+    Anyways, we keep check and load as constant because we want it to always point to the specified address and thus more reliable.
+
+7.  TODO
+
+
+8.  TODO
+
+
+9.  TODO
+
+
+10. TODO
+wordfunctionwe
