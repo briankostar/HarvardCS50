@@ -122,12 +122,11 @@ function dropoff()
 {
     //check distance to each passenger's house.
     //if distance < 30 drop off
-    //data i have is.. name of students
     var dropcount = 0;
     for(var i in shuttle.seats){
         if(shuttle.seats[i] != null){
             for(var j in PASSENGERS){
-                //if this passenger's name is same as PASSENGER's name, get that lat/lng
+                //if this passenger's name is same as PASSENGER's name, get lat/lng
                 if(shuttle.seats[i] == PASSENGERS[j]["name"]){
                     var lat = PASSENGERS[j]["final_lat"];
                     var lng = PASSENGERS[j]["final_lng"];
@@ -336,16 +335,10 @@ function load()
  */
 function pickup()
 {
-    //1. detect passenger in range
-    //loop through all the passenger lat/lng? Yes
-    //Passengers = [{username:, name: house},{}] <-add lat/lng in Populate.
-    
-    //loop passengers, check if each are <15.0m in distance and and seat is empty
-    //Distance calulation 
+    //Passenger Distance calulation 
     var students_nearby = [];
     students_index = [];
     for (var i in PASSENGERS){
-        //getgeometry() for lat lng?
         var d = shuttle.distance(PASSENGERS[i]["lat"], PASSENGERS[i]["lng"]); 
         if(d < 15){
             students_nearby.push(PASSENGERS[i]);
@@ -353,14 +346,13 @@ function pickup()
         }
     }
     
-    //set next avail seat as passenger name for each student nearby
-    //2. Add passenger to shuttle
+
+    //Add passenger to shuttle
     if(students_nearby.length > 0){
         for (var i in students_nearby){
             if(seats_available > 0 && PASSENGERS[students_index[i]]["picked_up"] == false){
                 
-                //5. Display passenger on shuttle list
-                //add to next null
+                //Display passenger on shuttle list
                 for(var j in shuttle.seats){
                     if(shuttle.seats[j] == null){
                         shuttle.seats[j] = students_nearby[i]["name"];
@@ -373,11 +365,11 @@ function pickup()
                 seats_available -= 1; 
                 //set passenger_pickup_status to true if picked up and exclude from boarding 
                 PASSENGERS[students_index[i]]["picked_up"] = true;
-                //3. Remove placemark 
+                //Remove placemark 
                 var features = earth.getFeatures();
                 var p = students_nearby[i]["placemark"]
                 features.removeChild(p);
-                //4. Remove marker
+                //Remove marker
                 var m = students_nearby[i]["marker"]
                 m.setMap(null);
                 
@@ -542,6 +534,5 @@ function setsize(){
     
     chart();
 }
-//maybe - HIGHLIGHT HOUSE if desination & HIGHLIGHT NAMES with matching color. nah need diff color picscd
 
 
