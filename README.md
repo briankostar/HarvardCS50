@@ -1,4 +1,4 @@
-Weekly Projects from Harvard CS 50
+Harvard Weekly Projects 
 ==================================
 
-This code base was built following the class outline. Please do not copy or redistribute this code.
+I wrote this code following the guidelines of the cs50 course. Please do not copy or redistribute this code.
